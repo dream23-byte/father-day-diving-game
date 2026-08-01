@@ -38,6 +38,10 @@ function updateProgress() {
   document.getElementById('progress-text').textContent = `已找到 ${found} / ${total} 件裝備`;
 }
 
+function assetUrl(path) {
+  return path + '?v=' + gameConfig.version;
+}
+
 function renderEquipmentMap() {
   const map = document.getElementById('equipment-map');
   map.innerHTML = '';
@@ -49,7 +53,7 @@ function renderEquipmentMap() {
     item.style.top = eq.location.y + '%';
 
     const img = document.createElement('img');
-    img.src = eq.icon;
+    img.src = assetUrl(eq.icon);
     img.alt = eq.name;
     img.onerror = function() {
       this.style.display = 'none';
@@ -71,7 +75,7 @@ function initCarousel(photos) {
 function updateCarouselImage(photos) {
   const img = document.getElementById('question-image');
   if (photos && photos.length > 0) {
-    img.src = photos[currentPhotoIndex];
+    img.src = assetUrl(photos[currentPhotoIndex]);
     img.onerror = function() {
       this.style.display = 'none';
       this.parentElement.innerHTML = '<div style="display:flex;align-items:center;justify-content:center;height:100%;font-size:3rem;">📸</div>';
@@ -137,7 +141,7 @@ function answerQuestion(isCorrect) {
     const getIcon = document.getElementById('get-icon');
     getIcon.innerHTML = '';
     const img = document.createElement('img');
-    img.src = currentEquipment.icon;
+    img.src = assetUrl(currentEquipment.icon);
     img.alt = currentEquipment.name;
     img.onerror = function() {
       this.style.display = 'none';
@@ -180,7 +184,7 @@ function renderEquipmentPool() {
     item.draggable = true;
 
     const img = document.createElement('img');
-    img.src = eq.icon;
+    img.src = assetUrl(eq.icon);
     img.alt = eq.name;
     img.onerror = function() {
       this.style.display = 'none';
@@ -309,7 +313,7 @@ function placeEquipment(eqId, slot) {
   if (!eq) return;
 
   slot.classList.add('filled');
-  slot.innerHTML = '<img src="' + eq.icon + '" alt="' + eq.name + '" style="width:100%;height:100%;object-fit:contain;">';
+  slot.innerHTML = '<img src="' + assetUrl(eq.icon) + '" alt="' + eq.name + '" style="width:100%;height:100%;object-fit:contain;">';
 
   const poolItem = document.querySelector('.draggable-equipment[data-id="' + eqId + '"]');
   if (poolItem) {
