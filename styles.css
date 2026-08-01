@@ -743,15 +743,17 @@ html, body {
 
 .body-part {
   position: absolute;
-  width: 60px;
-  height: 60px;
+  width: 50px;
+  height: 50px;
   border: 2px dashed #20B2AA;
   border-radius: 12px;
-  background: rgba(255, 255, 255, 0.7);
+  background: rgba(255, 255, 255, 0.75);
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: background 0.3s, border-color 0.3s;
+  transition: background 0.3s, border-color 0.3s, transform 0.2s;
+  box-shadow: 0 2px 6px rgba(0, 100, 100, 0.15);
+  z-index: 2;
 }
 
 .body-part.filled {
@@ -760,51 +762,63 @@ html, body {
 }
 
 .body-part.highlight {
-  background: rgba(255, 215, 0, 0.5);
+  background: rgba(255, 215, 0, 0.6);
   border: 2px solid #FFD700;
+  transform: translateX(-50%) scale(1.2);
+  box-shadow: 0 4px 15px rgba(255, 215, 0, 0.6);
+  z-index: 5;
+}
+
+#slot-back.highlight {
+  transform: scale(1.2);
 }
 
 .slot-label {
   font-size: 0.7rem;
-  color: #20B2AA;
+  color: #008B8B;
   pointer-events: none;
+  font-weight: bold;
+  background: rgba(255, 255, 255, 0.8);
+  padding: 2px 5px;
+  border-radius: 6px;
 }
 
 .body-part.filled .slot-label {
   display: none;
 }
 
+/* slot 位置：完全不重疊排列 */
 #slot-eyes {
-  top: 30px;
+  top: 15px;
   left: 50%;
   transform: translateX(-50%);
 }
 
 #slot-face {
-  top: 90px;
+  top: 65px;
   left: 50%;
   transform: translateX(-50%);
 }
 
 #slot-mouth {
-  top: 150px;
+  top: 115px;
   left: 50%;
   transform: translateX(-50%);
 }
 
 #slot-body {
-  top: 170px;
+  top: 165px;
   left: 50%;
   transform: translateX(-50%);
 }
 
 #slot-back {
-  top: 100px;
-  right: 10px;
+  top: 130px;
+  right: 8px;
 }
 
 #slot-feet {
-  bottom: 20px;
+  bottom: 12px;
   left: 50%;
   transform: translateX(-50%);
 }

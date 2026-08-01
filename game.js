@@ -251,9 +251,11 @@ function handleDragPointerMove(e) {
   dragClone.style.left = (e.clientX - rect.width / 2) + 'px';
   dragClone.style.top = (e.clientY - rect.height / 2) + 'px';
 
+  const pad = 10;
   document.querySelectorAll('.body-part').forEach(slot => {
     const sr = slot.getBoundingClientRect();
-    const hit = e.clientX >= sr.left && e.clientX <= sr.right && e.clientY >= sr.top && e.clientY <= sr.bottom;
+    const hit = e.clientX >= sr.left - pad && e.clientX <= sr.right + pad &&
+                e.clientY >= sr.top - pad && e.clientY <= sr.bottom + pad;
     slot.classList.toggle('highlight', hit);
   });
 }
@@ -264,9 +266,28 @@ function handleDragPointerUp(e) {
 
   if (!dragClone) return;
 
-  const target = document.elementFromPoint(e.clientX, e.clientY);
-  const slot = target ? target.closest('.body-part') : null;
   document.querySelectorAll('.body-part').forEach(s => s.classList.remove('highlight'));
+
+  const target = document.elementFromPoint(e.clientX, e.clientY);
+  let slot = target ? target.closest('.body-part') : null;
+
+  if (!slot) {
+    const pad = 14;
+    let best = null;
+    let bestDist = pad;
+    document.querySelectorAll('.body-part').forEach(s => {
+      if (s.classList.contains('filled')) return;
+      const sr = s.getBoundingClientRect();
+      const cx = sr.left + sr.width / 2;
+      const cy = sr.top + sr.height / 2;
+      const d = Math.hypot(e.clientX - cx, e.clientY - cy);
+      if (d <= pad && (!best || d < bestDist)) {
+        best = s;
+        bestDist = d;
+      }
+    });
+    slot = best;
+  }
 
   if (slot && slot.dataset.part === EQUIPMENT_POSITIONS[dragEqId]) {
     placeEquipment(dragEqId, slot);
