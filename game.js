@@ -2,7 +2,6 @@ let foundEquipment = [];
 let currentEquipment = null;
 let currentPhotoIndex = 0;
 let equippedItems = {};
-let draggedItem = null;
 
 const EQUIPMENT_POSITIONS = {
   mask: 'eyes',
@@ -181,7 +180,6 @@ function renderEquipmentPool() {
     const item = document.createElement('div');
     item.className = 'draggable-equipment';
     item.dataset.id = eq.id;
-    item.draggable = true;
 
     const img = document.createElement('img');
     img.src = assetUrl(eq.icon);
@@ -192,8 +190,7 @@ function renderEquipmentPool() {
     };
 
     item.appendChild(img);
-    item.addEventListener('dragstart', handleDragStart);
-    item.addEventListener('touchstart', handleTouchStart, { passive: false });
+    item.addEventListener('pointerdown', handleDragPointerDown);
     pool.appendChild(item);
   });
 }
@@ -220,92 +217,83 @@ function getSlotLabel(part) {
   return labels[part] || part;
 }
 
-function handleDragStart(e) {
-  draggedItem = e.target.closest('.draggable-equipment');
-  e.dataTransfer.effectAllowed = 'move';
-  e.dataTransfer.setData('text/plain', draggedItem.dataset.id);
-}
+let dragClone = null;
+let dragEqId = null;
 
-function handleTouchStart(e) {
-  draggedItem = e.target.closest('.draggable-equipment');
-  if (!draggedItem) return;
+function handleDragPointerDown(e) {
+  const item = e.target.closest('.draggable-equipment');
+  if (!item || item.classList.contains('placed')) return;
 
-  const touch = e.touches[0];
-  const rect = draggedItem.getBoundingClientRect();
-
-  draggedItem.style.position = 'fixed';
-  draggedItem.style.left = (touch.clientX - rect.width / 2) + 'px';
-  draggedItem.style.top = (touch.clientY - rect.height / 2) + 'px';
-  draggedItem.style.zIndex = '1000';
-  draggedItem.style.pointerEvents = 'none';
-
-  document.addEventListener('touchmove', handleTouchMove, { passive: false });
-  document.addEventListener('touchend', handleTouchEnd);
-}
-
-function handleTouchMove(e) {
   e.preventDefault();
-  if (!draggedItem) return;
+  dragEqId = item.dataset.id;
 
-  const touch = e.touches[0];
-  const rect = draggedItem.getBoundingClientRect();
+  dragClone = item.cloneNode(true);
+  dragClone.classList.add('dragging');
+  const rect = item.getBoundingClientRect();
+  dragClone.style.width = rect.width + 'px';
+  dragClone.style.height = rect.height + 'px';
+  dragClone.style.left = (e.clientX - rect.width / 2) + 'px';
+  dragClone.style.top = (e.clientY - rect.height / 2) + 'px';
+  document.body.appendChild(dragClone);
 
-  draggedItem.style.left = (touch.clientX - rect.width / 2) + 'px';
-  draggedItem.style.top = (touch.clientY - rect.height / 2) + 'px';
+  try { item.setPointerCapture(e.pointerId); } catch (err) {}
+
+  item.addEventListener('pointermove', handleDragPointerMove);
+  item.addEventListener('pointerup', handleDragPointerUp);
+  item.addEventListener('pointercancel', handleDragPointerCancel);
+}
+
+function handleDragPointerMove(e) {
+  e.preventDefault();
+  if (!dragClone) return;
+
+  const rect = dragClone.getBoundingClientRect();
+  dragClone.style.left = (e.clientX - rect.width / 2) + 'px';
+  dragClone.style.top = (e.clientY - rect.height / 2) + 'px';
 
   document.querySelectorAll('.body-part').forEach(slot => {
-    const slotRect = slot.getBoundingClientRect();
-    if (isOverlapping(touch.clientX, touch.clientY, slotRect)) {
-      slot.classList.add('highlight');
-    } else {
-      slot.classList.remove('highlight');
-    }
+    const sr = slot.getBoundingClientRect();
+    const hit = e.clientX >= sr.left && e.clientX <= sr.right && e.clientY >= sr.top && e.clientY <= sr.bottom;
+    slot.classList.toggle('highlight', hit);
   });
 }
 
-function handleTouchEnd(e) {
-  if (!draggedItem) return;
+function handleDragPointerUp(e) {
+  e.preventDefault();
+  cleanupDragListeners(e);
 
-  const touch = e.changedTouches[0];
-  const eqId = draggedItem.dataset.id;
-  const correctSlot = EQUIPMENT_POSITIONS[eqId];
+  if (!dragClone) return;
 
-  let dropped = false;
+  const target = document.elementFromPoint(e.clientX, e.clientY);
+  const slot = target ? target.closest('.body-part') : null;
+  document.querySelectorAll('.body-part').forEach(s => s.classList.remove('highlight'));
 
-  document.querySelectorAll('.body-part').forEach(slot => {
-    const slotRect = slot.getBoundingClientRect();
-    if (isOverlapping(touch.clientX, touch.clientY, slotRect)) {
-      if (slot.dataset.part === correctSlot) {
-        placeEquipment(eqId, slot);
-        dropped = true;
-      } else {
-        slot.classList.remove('highlight');
-      }
-    }
-    slot.classList.remove('highlight');
-  });
-
-  if (!dropped) {
-    returnDraggable(draggedItem);
+  if (slot && slot.dataset.part === EQUIPMENT_POSITIONS[dragEqId]) {
+    placeEquipment(dragEqId, slot);
   }
 
-  draggedItem.style.position = '';
-  draggedItem.style.left = '';
-  draggedItem.style.top = '';
-  draggedItem.style.zIndex = '';
-  draggedItem.style.pointerEvents = '';
-
-  document.removeEventListener('touchmove', handleTouchMove);
-  document.removeEventListener('touchend', handleTouchEnd);
-  draggedItem = null;
+  dragClone.remove();
+  dragClone = null;
+  dragEqId = null;
 }
 
-function isOverlapping(x, y, rect) {
-  return x >= rect.left && x <= rect.right && y >= rect.top && y <= rect.bottom;
+function handleDragPointerCancel(e) {
+  cleanupDragListeners(e);
+  if (dragClone) {
+    dragClone.remove();
+    dragClone = null;
+    dragEqId = null;
+  }
+  document.querySelectorAll('.body-part').forEach(s => s.classList.remove('highlight'));
 }
 
-function returnDraggable(item) {
-  item.style.opacity = '';
+function cleanupDragListeners(e) {
+  const item = e.target && e.target.closest ? e.target.closest('.draggable-equipment') : null;
+  if (item) {
+    item.removeEventListener('pointermove', handleDragPointerMove);
+    item.removeEventListener('pointerup', handleDragPointerUp);
+    item.removeEventListener('pointercancel', handleDragPointerCancel);
+  }
 }
 
 function placeEquipment(eqId, slot) {
@@ -331,26 +319,6 @@ function updateEquipProgress() {
 
   if (equipped >= total) {
     document.getElementById('btn-dive').disabled = false;
-  }
-}
-
-function handleDragOver(e) {
-  e.preventDefault();
-  e.dataTransfer.dropEffect = 'move';
-}
-
-function handleDrop(e) {
-  e.preventDefault();
-  if (!draggedItem) return;
-
-  const eqId = draggedItem.dataset.id;
-  const correctSlot = EQUIPMENT_POSITIONS[eqId];
-  const slot = e.target.closest('.body-part');
-
-  if (slot && slot.dataset.part === correctSlot) {
-    placeEquipment(eqId, slot);
-  } else if (slot) {
-    slot.classList.remove('highlight');
   }
 }
 
@@ -404,18 +372,6 @@ document.getElementById('btn-continue').addEventListener('click', () => {
 
 document.getElementById('carousel-prev').addEventListener('click', prevPhoto);
 document.getElementById('carousel-next').addEventListener('click', nextPhoto);
-
-document.querySelectorAll('.body-part').forEach(slot => {
-  slot.addEventListener('dragover', handleDragOver);
-  slot.addEventListener('drop', handleDrop);
-  slot.addEventListener('dragenter', (e) => {
-    e.preventDefault();
-    slot.classList.add('highlight');
-  });
-  slot.addEventListener('dragleave', () => {
-    slot.classList.remove('highlight');
-  });
-});
 
 document.getElementById('btn-dive').addEventListener('click', () => {
   showScreen('dive');
