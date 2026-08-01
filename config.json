@@ -1,0 +1,65 @@
+{
+  "siteTitle": "父親節潛水闖關",
+  "colors": {
+    "primary": "#0077B6",
+    "secondary": "#00B4D8",
+    "accent": "#90E0EF",
+    "background": "#CAF0F8",
+    "text": "#03045E"
+  },
+  "equipment": [
+    {
+      "id": "mask",
+      "name": "蛙鏡",
+      "icon": "🥽",
+      "location": { "x": 15, "y": 30 },
+      "question": "這是你第一次帶爸爸去海邊的照片，爸爸當時說了什麼？",
+      "photo": "photos/memory1.jpg"
+    },
+    {
+      "id": "snorkel",
+      "name": "呼吸管",
+      "icon": "🤿",
+      "location": { "x": 75, "y": 20 },
+      "question": "這是爸爸教你游泳的照片，你還記得嗎？",
+      "photo": "photos/memory2.jpg"
+    },
+    {
+      "id": "fins",
+      "name": "蛙鞋",
+      "icon": "🩴",
+      "location": { "x": 50, "y": 60 },
+      "question": "這是全家福海邊出遊，那天最開心的事是什麼？",
+      "photo": "photos/memory3.jpg"
+    },
+    {
+      "id": "wetsuit",
+      "name": "潛水衣",
+      "icon": "👙",
+      "location": { "x": 20, "y": 70 },
+      "question": "爸爸第一次教你騎腳踏車是在海邊，你還記得嗎？",
+      "photo": "photos/memory4.jpg"
+    },
+    {
+      "id": "tank",
+      "name": "氣瓶",
+      "icon": "🫧",
+      "location": { "x": 80, "y": 65 },
+      "question": "這是爸爸生日，你們一起在海邊慶祝的照片",
+      "photo": "photos/memory5.jpg"
+    },
+    {
+      "id": "goggles",
+      "name": "面鏡",
+      "icon": "👓",
+      "location": { "x": 45, "y": 40 },
+      "question": "最近一次和爸爸去海邊是什麼時候？那天做了什麼？",
+      "photo": "photos/memory6.jpg"
+    }
+  ],
+  "postcard": {
+    "message": "親愛的爸爸，謝謝您一直以來的陪伴與保護。祝您父親節快樂！",
+    "address": "全世界最棒的爸爸收",
+    "stamp": "2026.08.08"
+  }
+}

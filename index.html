@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>父親節潛水闖關</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- 開始畫面 -->
+  <div id="screen-start" class="screen active">
+    <div class="ocean-bg">
+      <div class="bubble bubble-1"></div>
+      <div class="bubble bubble-2"></div>
+      <div class="bubble bubble-3"></div>
+    </div>
+    <div class="start-content">
+      <h1>🤿 父親節潛水闖關 🤿</h1>
+      <p>爸爸的潛水裝備散落在海邊各處</p>
+      <p>快來幫爸爸找回所有裝備吧！</p>
+      <button id="btn-start" class="btn-primary">開始冒險</button>
+    </div>
+  </div>
+
+  <!-- 尋找裝備畫面 -->
+  <div id="screen-search" class="screen">
+    <div class="ocean-bg">
+      <div class="bubble bubble-1"></div>
+      <div class="bubble bubble-2"></div>
+      <div class="bubble bubble-3"></div>
+    </div>
+    <div class="search-header">
+      <h2>🔍 尋找裝備</h2>
+      <p>找到散落的裝備，點擊它！</p>
+      <div class="progress-bar">
+        <div id="progress-fill" class="progress-fill"></div>
+      </div>
+      <p id="progress-text">已找到 0 / 6 件裝備</p>
+    </div>
+    <div id="equipment-map" class="equipment-map">
+      <!-- 裝備會用 JS 動態生成 -->
+    </div>
+  </div>
+
+  <!-- 回憶錄答題畫面 -->
+  <div id="screen-question" class="screen">
+    <div class="ocean-bg">
+      <div class="bubble bubble-1"></div>
+      <div class="bubble bubble-2"></div>
+    </div>
+    <div class="question-container">
+      <h2 id="question-title">回憶錄</h2>
+      <div id="memory-carousel" class="memory-carousel">
+        <button id="carousel-prev" class="carousel-btn carousel-prev">◀</button>
+        <div class="carousel-view">
+          <img id="question-image" src="" alt="回憶照片">
+        </div>
+        <button id="carousel-next" class="carousel-btn carousel-next">▶</button>
+        <div id="carousel-dots" class="carousel-dots"></div>
+      </div>
+      <p id="question-text" class="question-text"></p>
+      <div id="answer-area" class="answer-area">
+        <button class="btn-answer" data-answer="correct">記得 ❤️</button>
+        <button class="btn-answer" data-answer="skip">跳過 ⏭️</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 獲得裝備畫面 -->
+  <div id="screen-get" class="screen">
+    <div class="ocean-bg">
+      <div class="bubble bubble-1"></div>
+      <div class="bubble bubble-2"></div>
+    </div>
+    <div class="get-container">
+      <div class="get-icon" id="get-icon">🥽</div>
+      <h2 id="get-name">蛙鏡</h2>
+      <p>獲得裝備！</p>
+      <button id="btn-continue" class="btn-primary">繼續尋找</button>
+    </div>
+  </div>
+
+  <!-- 穿戴裝備畫面 -->
+  <div id="screen-equip" class="screen">
+    <div class="ocean-bg">
+      <div class="bubble bubble-1"></div>
+      <div class="bubble bubble-2"></div>
+      <div class="bubble bubble-3"></div>
+    </div>
+    <div class="equip-container">
+      <h2>🎯 穿戴裝備</h2>
+      <p>將裝備拖曳到正確位置！</p>
+      <div class="equip-workspace">
+        <div id="diver-body" class="diver-body">
+          <div class="body-part" data-part="eyes" id="slot-eyes">
+            <span class="slot-label">眼睛</span>
+          </div>
+          <div class="body-part" data-part="face" id="slot-face">
+            <span class="slot-label">臉部</span>
+          </div>
+          <div class="body-part" data-part="mouth" id="slot-mouth">
+            <span class="slot-label">嘴巴</span>
+          </div>
+          <div class="body-part" data-part="body" id="slot-body">
+            <span class="slot-label">身體</span>
+          </div>
+          <div class="body-part" data-part="back" id="slot-back">
+            <span class="slot-label">背部</span>
+          </div>
+          <div class="body-part" data-part="feet" id="slot-feet">
+            <span class="slot-label">腳</span>
+          </div>
+          <div class="diver-silhouette">🤿</div>
+        </div>
+        <div id="equipment-pool" class="equipment-pool">
+          <!-- 裝備會用 JS 動態生成 -->
+        </div>
+      </div>
+      <p id="equip-progress" class="equip-progress">已穿戴 0 / 6 件裝備</p>
+      <button id="btn-dive" class="btn-primary" disabled>前往潛水</button>
+    </div>
+  </div>
+
+  <!-- 潛水畫面 -->
+  <div id="screen-dive" class="screen">
+    <div class="ocean-bg deep-ocean">
+      <div class="bubble bubble-1"></div>
+      <div class="bubble bubble-2"></div>
+      <div class="bubble bubble-3"></div>
+      <div class="bubble bubble-4"></div>
+      <div class="bubble bubble-5"></div>
+    </div>
+    <div class="dive-content">
+      <h2>🌊 前往海水潛水 🌊</h2>
+      <div id="diver" class="diver">🤿</div>
+      <p>點擊拍照留念！</p>
+      <button id="btn-photo" class="btn-primary">📸 拍照</button>
+    </div>
+  </div>
+
+  <!-- 拍照畫面 -->
+  <div id="screen-photo" class="screen">
+    <div class="ocean-bg">
+      <div class="bubble bubble-1"></div>
+      <div class="bubble bubble-2"></div>
+    </div>
+    <div class="photo-container">
+      <h2>📷 合照留念</h2>
+      <div id="photo-frame" class="photo-frame">
+        <img id="photo-result" src="" alt="合照">
+        <div class="fish fish-1">🐟</div>
+        <div class="fish fish-2">🐠</div>
+        <div class="fish fish-3">🐡</div>
+      </div>
+      <button id="btn-bubble" class="btn-primary">✨ 點擊慶祝 ✨</button>
+    </div>
+  </div>
+
+  <!-- 泡泡轉場畫面 -->
+  <div id="screen-bubble" class="screen">
+    <div class="bubble-transition">
+      <div class="big-bubble" id="big-bubble">🫧</div>
+      <h1 class="happy-text">HAPPY FATHER'S DAY</h1>
+    </div>
+  </div>
+
+  <!-- 明信片畫面 -->
+  <div id="screen-postcard" class="screen">
+    <div class="postcard-container">
+      <div class="postcard">
+        <div class="postcard-front">
+          <h2>📮 父親節明信片</h2>
+        </div>
+        <div class="postcard-back">
+          <div class="postcard-stamp" id="postcard-stamp">2026.08.08</div>
+          <div class="postcard-address" id="postcard-address">全世界最棒的爸爸收</div>
+          <div class="postcard-message" id="postcard-message">親愛的爸爸，謝謝您一直以來的陪伴與保護。祝您父親節快樂！</div>
+          <div class="postcard-from">— 您的孩子敬上</div>
+        </div>
+      </div>
+      <button id="btn-restart" class="btn-primary">🔄 再玩一次</button>
+    </div>
+  </div>
+
+  <script src="config.js"></script>
+  <script src="game.js"></script>
+</body>
+</html>

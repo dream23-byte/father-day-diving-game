@@ -1,0 +1,16 @@
+# 系統檔案
+.DS_Store
+Thumbs.db
+
+# 編輯器
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Node
+node_modules/
+
+# 暫存檔
+*.tmp
+*.temp
