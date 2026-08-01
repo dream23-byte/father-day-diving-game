@@ -1,4 +1,4 @@
-const DEFAULT_CONFIG = {
+const gameConfig = {
   siteTitle: "父親節潛水闖關",
   colors: {
     primary: "#40E0D0",
@@ -87,17 +87,3 @@ const DEFAULT_CONFIG = {
     stamp: "2026.08.08"
   }
 };
-
-let gameConfig = DEFAULT_CONFIG;
-
-async function loadConfig() {
-  try {
-    const response = await fetch('config.json');
-    if (response.ok) {
-      const config = await response.json();
-      gameConfig = { ...DEFAULT_CONFIG, ...config };
-    }
-  } catch (e) {
-    console.log('使用預設設定');
-  }
-}

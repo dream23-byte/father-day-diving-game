@@ -444,6 +444,4 @@ document.getElementById('btn-photo').addEventListener('click', () => {
 document.getElementById('btn-bubble').addEventListener('click', showBubbleTransition);
 document.getElementById('btn-restart').addEventListener('click', restartGame);
 
-loadConfig().then(() => {
-  document.title = gameConfig.siteTitle;
-});
+document.title = gameConfig.siteTitle;
