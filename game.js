@@ -125,7 +125,8 @@ function startQuestion(eq) {
   document.getElementById('question-title').textContent = eq.name + ' - 回憶錄';
   document.getElementById('question-text').textContent = eq.question;
 
-  initCarousel(eq.photos);
+  const photos = eq.photos || (eq.photo ? [eq.photo] : []);
+  initCarousel(photos);
   showScreen('question');
 }
 
