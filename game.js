@@ -362,10 +362,13 @@ function updateEquipProgress() {
 }
 
 function showBubbleTransition() {
+  const video = document.getElementById('transition-video');
+  video.src = assetUrl('photos/web/transition.mp4');
   showScreen('bubble');
-  setTimeout(() => {
+  video.play().catch(() => {});
+  video.onended = function() {
     showPostcard();
-  }, 3500);
+  };
 }
 
 function showPostcard() {

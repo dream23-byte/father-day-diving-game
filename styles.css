@@ -552,6 +552,20 @@ html, body {
   font-size: 4rem;
 }
 
+.transition-video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 1;
+}
+
+.bubble-transition .happy-text {
+  position: relative;
+  z-index: 2;
+}
+
 @keyframes bubble-rise {
   0% {
     transform: translateY(100vh) scale(0.5);
