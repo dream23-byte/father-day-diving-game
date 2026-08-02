@@ -419,24 +419,25 @@ document.getElementById('btn-dive').addEventListener('click', () => {
 document.getElementById('btn-photo').addEventListener('click', () => {
   const resultImg = document.getElementById('photo-result');
 
-  const defaultPhoto = 'data:image/svg+xml,' + encodeURIComponent(`
-    <svg xmlns="http://www.w3.org/2000/svg" width="280" height="280" viewBox="0 0 280 280">
-      <defs>
-        <linearGradient id="ocean" x1="0%" y1="0%" x2="0%" y2="100%">
-          <stop offset="0%" style="stop-color:#87CEEB"/>
-          <stop offset="50%" style="stop-color:#40E0D0"/>
-          <stop offset="100%" style="stop-color:#20B2AA"/>
-        </linearGradient>
-      </defs>
-      <rect fill="url(#ocean)" width="280" height="280"/>
-      <text x="140" y="100" text-anchor="middle" font-size="60">🤿</text>
-      <text x="80" y="200" text-anchor="middle" font-size="40">🐟</text>
-      <text x="140" y="180" text-anchor="middle" font-size="50">👨‍👧</text>
-      <text x="200" y="200" text-anchor="middle" font-size="40">🐠</text>
-    </svg>
-  `);
-
-  resultImg.src = defaultPhoto;
+  resultImg.src = assetUrl('photos/web/group-photo.jpg');
+  resultImg.onerror = function() {
+    this.src = 'data:image/svg+xml,' + encodeURIComponent(`
+      <svg xmlns="http://www.w3.org/2000/svg" width="280" height="280" viewBox="0 0 280 280">
+        <defs>
+          <linearGradient id="ocean" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" style="stop-color:#87CEEB"/>
+            <stop offset="50%" style="stop-color:#40E0D0"/>
+            <stop offset="100%" style="stop-color:#20B2AA"/>
+          </linearGradient>
+        </defs>
+        <rect fill="url(#ocean)" width="280" height="280"/>
+        <text x="140" y="100" text-anchor="middle" font-size="60">🤿</text>
+        <text x="80" y="200" text-anchor="middle" font-size="40">🐟</text>
+        <text x="140" y="180" text-anchor="middle" font-size="50">👨‍👧</text>
+        <text x="200" y="200" text-anchor="middle" font-size="40">🐠</text>
+      </svg>
+    `);
+  };
   showScreen('photo');
 });
 
