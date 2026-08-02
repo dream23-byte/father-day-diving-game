@@ -1,6 +1,6 @@
 ﻿const gameConfig = {
   siteTitle: "父親節潛水闖關",
-  version: 4,
+  version: 5,
   colors: {
     primary: "#40E0D0",
     secondary: "#87CEEB",
