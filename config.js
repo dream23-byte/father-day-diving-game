@@ -1,6 +1,6 @@
-const gameConfig = {
+﻿const gameConfig = {
   siteTitle: "父親節潛水闖關",
-  version: 2,
+  version: 3,
   colors: {
     primary: "#40E0D0",
     secondary: "#87CEEB",
@@ -16,9 +16,7 @@ const gameConfig = {
       location: { x: 15, y: 30 },
       question: "這是你第一次帶爸爸去海邊的照片，爸爸當時說了什麼？",
       photos: [
-        "photos/memory1-1.jpg",
-        "photos/memory1-2.jpg",
-        "photos/memory1-3.jpg"
+        "photos/web/memory1-1.jpg"
       ]
     },
     {
@@ -28,9 +26,9 @@ const gameConfig = {
       location: { x: 75, y: 20 },
       question: "這是爸爸教你游泳的照片，你還記得嗎？",
       photos: [
-        "photos/memory2-1.jpg",
-        "photos/memory2-2.jpg",
-        "photos/memory2-3.jpg"
+        "photos/web/memory2-1.jpg",
+        "photos/web/memory2-2.jpg",
+        "photos/web/memory2-3.jpg"
       ]
     },
     {
@@ -40,9 +38,8 @@ const gameConfig = {
       location: { x: 50, y: 60 },
       question: "這是全家福海邊出遊，那天最開心的事是什麼？",
       photos: [
-        "photos/memory3-1.jpg",
-        "photos/memory3-2.jpg",
-        "photos/memory3-3.jpg"
+        "photos/web/memory3-1.jpg",
+        "photos/web/memory3-2.jpg"
       ]
     },
     {
@@ -52,9 +49,8 @@ const gameConfig = {
       location: { x: 20, y: 70 },
       question: "爸爸第一次教你騎腳踏車是在海邊，你還記得嗎？",
       photos: [
-        "photos/memory4-1.jpg",
-        "photos/memory4-2.jpg",
-        "photos/memory4-3.jpg"
+        "photos/web/memory4-1.jpg",
+        "photos/web/memory4-2.jpg"
       ]
     },
     {
@@ -64,9 +60,8 @@ const gameConfig = {
       location: { x: 80, y: 65 },
       question: "這是爸爸生日，你們一起在海邊慶祝的照片",
       photos: [
-        "photos/memory5-1.jpg",
-        "photos/memory5-2.jpg",
-        "photos/memory5-3.jpg"
+        "photos/web/memory5-1.jpg",
+        "photos/web/memory5-2.jpg"
       ]
     },
     {
@@ -76,9 +71,8 @@ const gameConfig = {
       location: { x: 45, y: 40 },
       question: "最近一次和爸爸去海邊是什麼時候？那天做了什麼？",
       photos: [
-        "photos/memory6-1.jpg",
-        "photos/memory6-2.jpg",
-        "photos/memory6-3.jpg"
+        "photos/web/memory6-1.jpg",
+        "photos/web/memory6-2.jpg"
       ]
     }
   ],
@@ -88,3 +82,4 @@ const gameConfig = {
     stamp: "2026.08.08"
   }
 };
+
