@@ -24,7 +24,7 @@
       name: "呼吸管",
       icon: "photos/snorkel.png",
       location: { x: 75, y: 20 },
-      question: "嘿嘿~猜猜我是誰~有沒有一模一樣~",
+      question: "嘿嘿～猜猜我是誰～有沒有一模一樣～",
       photos: [
         "photos/web/memory2-1.jpg",
         "photos/web/memory2-2.jpg",
@@ -58,7 +58,7 @@
       name: "氣瓶",
       icon: "photos/tank.png",
       location: { x: 80, y: 65 },
-      question: "轉轉~轉出小驚喜！Happy Father's Day!",
+      question: "轉轉～轉出小驚喜！Happy Father's Day!",
       photos: [
         "photos/web/memory5-1.jpg",
         "photos/web/memory5-2.jpg"
