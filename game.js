@@ -373,7 +373,7 @@ function showBubbleTransition() {
 
 function showPostcard() {
   const img = document.getElementById('postcard-image');
-  img.src = assetUrl('photos/web/postcard.png');
+  img.src = assetUrl('photos/web/postcard-2026.png');
   showScreen('postcard');
 }
 
