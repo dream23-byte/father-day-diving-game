@@ -67,17 +67,35 @@ function renderEquipmentMap() {
 
 function initCarousel(photos) {
   currentPhotoIndex = 0;
+  const prevBtn = document.getElementById('carousel-prev');
+  const nextBtn = document.getElementById('carousel-next');
+  const dotsContainer = document.getElementById('carousel-dots');
+  if (photos.length <= 1) {
+    prevBtn.style.display = 'none';
+    nextBtn.style.display = 'none';
+    dotsContainer.style.display = 'none';
+  } else {
+    prevBtn.style.display = '';
+    nextBtn.style.display = '';
+    dotsContainer.style.display = '';
+  }
   updateCarouselImage(photos);
   renderCarouselDots(photos.length);
 }
 
 function updateCarouselImage(photos) {
   const img = document.getElementById('question-image');
+  const placeholder = document.getElementById('carousel-placeholder');
   if (photos && photos.length > 0) {
+    img.style.display = '';
+    if (placeholder) placeholder.style.display = 'none';
     img.src = assetUrl(photos[currentPhotoIndex]);
+    img.onload = function() {
+      if (placeholder) placeholder.style.display = 'none';
+    };
     img.onerror = function() {
       this.style.display = 'none';
-      this.parentElement.innerHTML = '<div style="display:flex;align-items:center;justify-content:center;height:100%;font-size:3rem;">📸</div>';
+      if (placeholder) placeholder.style.display = 'flex';
     };
   }
 }

@@ -296,6 +296,7 @@ html, body {
 }
 
 .carousel-view {
+  position: relative;
   width: 100%;
   height: 200px;
   border: 5px solid white;
@@ -309,6 +310,16 @@ html, body {
   width: 100%;
   height: 100%;
   object-fit: cover;
+}
+
+.carousel-placeholder {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #E0F7FA, #B2EBF2);
 }
 
 .carousel-btn {
