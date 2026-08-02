@@ -58,7 +58,7 @@
       name: "氣瓶",
       icon: "photos/tank.png",
       location: { x: 80, y: 65 },
-      question: "轉轉～轉出小驚喜！Happy Father's Day!",
+      question: "轉轉～轉出小驚喜～Happy Father's Day～",
       photos: [
         "photos/web/memory5-1.jpg",
         "photos/web/memory5-2.jpg"
