@@ -28,51 +28,26 @@ html, body {
   display: flex;
 }
 
-/* 水彩海洋背景 */
+/* 水彩海灘背景 */
 .ocean-bg {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background: linear-gradient(180deg, 
-    #87CEEB 0%, 
-    #40E0D0 30%, 
-    #20B2AA 60%, 
-    #008B8B 100%);
+  background: url('photos/web/bg-beach.jpg') center/cover no-repeat;
   overflow: hidden;
 }
 
 .ocean-bg::before {
   content: '';
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 40%;
-  background: linear-gradient(180deg, 
-    rgba(135, 206, 235, 0.8) 0%, 
-    rgba(64, 224, 208, 0.6) 100%);
-}
-
-.ocean-bg::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 20%;
-  background: linear-gradient(0deg, 
-    rgba(245, 222, 179, 0.6) 0%, 
-    transparent 100%);
+  inset: 0;
+  background: rgba(255, 255, 255, 0.15);
 }
 
 .deep-ocean {
-  background: linear-gradient(180deg, 
-    #006666 0%, 
-    #008B8B 30%, 
-    #20B2AA 60%, 
-    #40E0D0 100%);
+  background: url('photos/web/bg-beach.jpg') center/cover no-repeat;
 }
 
 /* 泡泡動畫 */
@@ -507,7 +482,7 @@ html, body {
   border-radius: 20px;
   overflow: hidden;
   background: linear-gradient(180deg, #87CEEB, #40E0D0);
-  box-shadow: 0 8px 30px rgba(0, 100, 100, 0.3);
+  box-shadow: 0 8px 30px rgba(0, 100, 100, 0.3), inset 0 0 20px rgba(255, 255, 255, 0.3);
 }
 
 .photo-frame img {
@@ -556,7 +531,6 @@ html, body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(180deg, #87CEEB, #40E0D0);
 }
 
 .big-bubble {
@@ -618,7 +592,6 @@ html, body {
   justify-content: center;
   width: 100%;
   height: 100%;
-  background: linear-gradient(180deg, #87CEEB, #E0F7FA);
   padding: 20px;
 }
 
@@ -648,9 +621,26 @@ html, body {
   color: white;
   padding: 25px;
   text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.postcard-front::before {
+  content: '';
+  position: absolute;
+  top: 0; right: 0; bottom: 0; left: 0;
+  background: url('photos/web/bg-beach.jpg') center/cover no-repeat;
+  opacity: 0.25;
 }
 
 .postcard-front h2 {
+  position: relative;
+  z-index: 1;
+}
+
+.postcard-front h2 {
+  position: relative;
+  z-index: 1;
   font-size: 1.5rem;
   text-shadow: 2px 2px 4px rgba(0, 100, 100, 0.3);
 }
