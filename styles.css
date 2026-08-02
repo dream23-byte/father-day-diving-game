@@ -609,96 +609,17 @@ html, body {
   padding: 20px;
 }
 
-.postcard {
-  width: 90%;
-  max-width: 350px;
-  background: #FFFEF2;
-  border-radius: 20px;
-  box-shadow: 0 12px 40px rgba(0, 100, 100, 0.3);
-  overflow: hidden;
+.postcard-image {
+  max-width: 92%;
+  max-height: 80vh;
+  border-radius: 12px;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.35);
   animation: slide-up 0.8s ease;
 }
 
 @keyframes slide-up {
-  from {
-    transform: translateY(50px);
-    opacity: 0;
-  }
-  to {
-    transform: translateY(0);
-    opacity: 1;
-  }
-}
-
-.postcard-front {
-  background: linear-gradient(135deg, #40E0D0, #20B2AA);
-  color: white;
-  padding: 25px;
-  text-align: center;
-  position: relative;
-  overflow: hidden;
-}
-
-.postcard-front::before {
-  content: '';
-  position: absolute;
-  top: 0; right: 0; bottom: 0; left: 0;
-  background: url('photos/web/bg-beach.jpg') center/cover no-repeat;
-  opacity: 0.25;
-}
-
-.postcard-front h2 {
-  position: relative;
-  z-index: 1;
-}
-
-.postcard-front h2 {
-  position: relative;
-  z-index: 1;
-  font-size: 1.5rem;
-  text-shadow: 2px 2px 4px rgba(0, 100, 100, 0.3);
-}
-
-.postcard-back {
-  padding: 30px;
-  position: relative;
-}
-
-.postcard-stamp {
-  position: absolute;
-  top: 15px;
-  right: 20px;
-  font-size: 0.85rem;
-  color: #20B2AA;
-  border: 2px dashed #40E0D0;
-  padding: 8px 12px;
-  border-radius: 8px;
-  background: rgba(64, 224, 208, 0.1);
-}
-
-.postcard-address {
-  font-size: 1rem;
-  color: #006064;
-  margin-bottom: 25px;
-  padding-bottom: 15px;
-  border-bottom: 2px dashed #B2EBF2;
-}
-
-.postcard-message {
-  font-size: 1rem;
-  color: #008B8B;
-  line-height: 1.8;
-  margin-bottom: 25px;
-  font-style: italic;
-  padding: 15px;
-  background: rgba(224, 247, 250, 0.5);
-  border-radius: 15px;
-}
-
-.postcard-from {
-  text-align: right;
-  color: #20B2AA;
-  font-size: 0.95rem;
+  from { transform: translateY(50px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
 }
 
 #btn-restart {

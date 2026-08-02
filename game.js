@@ -372,10 +372,8 @@ function showBubbleTransition() {
 }
 
 function showPostcard() {
-  const pc = gameConfig.postcard;
-  document.getElementById('postcard-message').textContent = pc.message;
-  document.getElementById('postcard-address').textContent = pc.address;
-  document.getElementById('postcard-stamp').textContent = pc.stamp;
+  const img = document.getElementById('postcard-image');
+  img.src = assetUrl('photos/web/postcard.jpg');
   showScreen('postcard');
 }
 
